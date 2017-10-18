@@ -1,0 +1,21 @@
+extends ./layout/default_layout
+
+block title_name
+	title=title
+block header
+	include ../elements/header/header
+
+	include ../elements/title/title
+
+	include ../elements/about/about
+
+	include ../elements/story/story
+
+	include ../elements/config/config
+	include ../elements/backstop/backstop
+
+	include ../elements/contacts/contacts
+
+	.progress
+	p.badge
+		a(href=git_hub_link target="_blank") Fork me on GitHub

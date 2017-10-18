@@ -1,0 +1,121 @@
+section.slide
+	h2 Возможности
+
+	ul
+		li.next Можно настроить за пять минут
+		li.next Тестирование отдельных блоков
+		li.next Удаление или скрытие элементов со страницы
+		li.next Детальные отчеты в браузере и CLI
+		li.next CI интеграция с JUnit отчетами
+		li.next Возможность использовать глобально или интегрировать с npm и Gulp
+
+section.slide
+	h2 Использование
+
+	p.next
+		mark $ npm install -g backstopjs
+		|  - установка
+	p.next
+		mark $ backstop init
+		|  - создание базового конфига
+	p.next
+		mark $ backstop reference
+		|  - создание эталонной картинки
+	p.next
+		mark $ backstop test
+		|  - запуск теста
+	p.next
+		mark $ backstop approve
+		|  - замена эталона тестируемой картинкой
+
+section.slide
+	img.cover(src="./img/test_example.jpg", alt="bakstop_test_example")
+
+section.slide.backstopjs_header-sub1
+	h2.shout Настройка
+
+section.slide
+	h2(style="margin-bottom: 0 !important") backstop.json
+	pre
+		code {
+		code.mark.next   "id": "prod_test",
+		code   "viewports": [...]
+		code   "scenarios": [...]
+		code   "paths": {...}
+		code.mark.next   "engine": "chrome",//- "phantomjs", "slimerjs"
+		code.mark.next   "report": ["browser"], //- "CI"
+		code.mark.next   "debug": false
+		code }
+
+section.slide
+	h2 Viewports
+
+	pre
+		code "viewports": [
+		code   {
+		code.mark.next     "name": "desktop_mdpi",
+		code.mark.next     "width": 1280,
+		code.mark.next     "height": 800
+		code   },
+		code   ...
+		code ]
+
+section.slide
+	h2 onBeforeScript, onReadyScript
+
+	pre
+		code "onBeforeScript": "chromy/onBefore.js",
+		code "onReadyScript": "chromy/onReady.js",
+		code 
+		code module.exports = function(chromy, scenario, vp) {
+		code   // chromy – Chromy instance
+		code   // scenario object
+		code   // vp – viewport obj
+		code   };
+
+section.slide
+	h2 Scenarios
+
+	pre
+		code "scenarios": [
+		code   {
+		code.mark.next     "url": "website.com",
+		code.mark.next     "referenceUrl": "stage.website.com",
+		code     //--
+		code.mark.next     "url": "..local_folder/index.html",
+		code     ...
+		code   },
+
+
+section.slide
+	h2 Scenarios
+	pre
+		code.mark.next "hideSelectors": [".hide_on_test"],
+		code.mark.next "removeSelectors": [".remove_on_test"],
+		code.mark.next "selectors": [
+		code   ".hero",
+		code   ".portfolio",
+		code   ".newsletter",
+		code ],
+
+
+section.slide
+	h2 Scenarios
+	pre
+		code.mark.next     "readyEvent": null, // or some event
+		code.mark.next     "delay": 500,
+		code.mark.next     "misMatchThreshold" : 0.1,
+		code   }
+		code ]
+
+section.slide
+	h2 Paths
+	pre
+		code "paths": {
+		code   "bitmaps_reference": "./bitmaps_reference",
+		code   "bitmaps_test": "./bitmaps_test",
+		code   "engine_scripts": "./engine_scripts",
+		code   "html_report": "./html_report",
+		code   "ci_report": "./ci_report"
+		code },
+

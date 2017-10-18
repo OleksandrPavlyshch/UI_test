@@ -1,0 +1,55 @@
+section.slide.black
+	.hub
+		span Google
+		| 
+		span Script
+
+section.slide.link-slide
+	br
+	img(style="max-width: 90%;" src="./img/google_script.jpg", alt="google_script")
+	p
+		a.link-slide_link(href="https://developers.google.com/apps-script/") https://goo.gl/Vw8iCF
+
+section.slide.link-slide
+	h2 Как каталог видим мы
+	img(style="max-width: 80%;" src="./img/xml.jpg", alt="xml")
+
+section.slide.link-slide
+	h2 Как каталог видит клиент
+	img(style="max-width: 80%;" src="./img/exel.jpg", alt="exel")
+
+section.slide.link-slide
+	h2 Tools > Script editor
+	img(style="max-width: 70%; box-shadow: 0 0 3px #000;" src="./img/google_script_tool.jpg", alt="google_script_tool")
+
+section.slide
+	br
+	br
+	br
+	pre
+		code function getData() {
+		code.mark.next   var sheet = SpreadsheetApp.getActiveSheet(),
+		code.mark.next   data = sheet.getDataRange().getValues();
+		code   return data;
+		code }
+
+section.slide
+	pre
+		code function onOpen() {
+		code.mark.next   var ui = SpreadsheetApp.getUi();
+		code.mark.next   ui.createMenu('Export Products')
+		code.mark.next     .addItem('Export to XML', 'exportToXML')
+		code.mark.next     .addToUi();
+		code }
+		code function exportToXML() {
+		code.mark.next   var data = getData();
+		code.mark.next   /*Magic*/
+		code }
+
+section.slide
+	h2 Google Script
+	br
+	ul
+		li.next Кастомная логика в сервисах Google
+		li.next Можно написать их взаимодействие
+		li.next Можно отдать как готовый инструмент клиенту
