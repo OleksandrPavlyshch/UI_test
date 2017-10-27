@@ -1,4 +1,60 @@
 section.slide
+	h2 Критерии выбора
+
+	br
+	ul
+		li.next Окупится ли польза от изучения технологии?
+		li.next Какое у нее будущее?
+		li.next Насколько легко и быстро внедрить её в проэкт?
+
+section.slide
+	h2 Какие варианты?
+
+	br
+	ul
+		li.next PhantomCSS
+		li.next BackstopJS
+		li.next Selenium
+		li.next Gemini
+		li.next BrowserStack
+
+section.slide
+	.half(style="vertical-align: top;width:48%; padding: 0")
+		h2 BackstopJS
+		br
+		ul(style="font-size: 26px;")
+			li Latest commit 25/10/2017
+			li Inital commit 15/10/2017
+			li Last version 3.0.31
+			li 730 downloads in the last day
+			li 4,537 downloads in the last week
+			li 22,137 downloads in the last month
+			li 16 open pull requests on GitHub
+	.half(style="vertical-align: top;width:48%; padding: 0 0 0 5%;")
+		h2 PhantomCSS
+		br
+		ul(style="font-size: 26px;")
+			li Latest commit 11/10/2017
+			li Inital commit 6/11/2012
+			li Last version 1.2.0
+			li 402 downloads in the last day
+			li 2,315 downloads in the last week
+			li 9,838 downloads in the last month
+			li One open pull request on GitHub
+
+section.slide
+	h2 BackstopJS
+	p
+		b Catch CSS curve balls.
+	p CLI инструмент для автоматизации тестирования визуальных регресий.
+
+	ul
+		li Chrome Headless, Phantom and Slimer
+		li Resemble JS
+		li ChromyJS and CasperJS
+
+
+section.slide
 	h2 Возможности
 
 	ul
@@ -10,14 +66,19 @@ section.slide
 		li.next Возможность использовать глобально или интегрировать с npm и Gulp
 
 section.slide
-	h2 Использование
+	h2 Установка
 
+	br
 	p.next
 		mark $ npm install -g backstopjs
 		|  - установка
 	p.next
 		mark $ backstop init
 		|  - создание базового конфига
+
+section.slide
+	h2 Использование
+	br
 	p.next
 		mark $ backstop reference
 		|  - создание эталонной картинки
@@ -35,7 +96,7 @@ section.slide.backstopjs_header-sub1
 	h2.shout Настройка
 
 section.slide
-	h2(style="margin-bottom: 0 !important") backstop.json
+	h2 backstop.json
 	pre
 		code {
 		code.mark.next   "id": "prod_test",
@@ -43,9 +104,29 @@ section.slide
 		code   "scenarios": [...]
 		code   "paths": {...}
 		code.mark.next   "engine": "chrome",//- "phantomjs", "slimerjs"
+		code   ....
+
+section.slide
+	h2 backstop.json
+	br
+	pre
+		code.mark.next   "onBeforeScript": "chromy/onBefore.js",
+		code.mark.next   "onReadyScript": "chromy/onReady.js",
 		code.mark.next   "report": ["browser"], //- "CI"
-		code.mark.next   "debug": false
+		//- code.mark.next   "debug": false,
+		code.mark.next   "debugWindow": false
 		code }
+
+
+section.slide
+	h2 onBeforeScript, onReadyScript
+	br
+	pre
+		code module.exports = function(chromy, scenario, vp) {
+		code.mark.next   // chromy – Chromy instance
+		code.mark.next   // scenario object
+		code.mark.next   // vp – viewport obj
+		code   };
 
 section.slide
 	h2 Viewports
@@ -61,61 +142,57 @@ section.slide
 		code ]
 
 section.slide
-	h2 onBeforeScript, onReadyScript
-
-	pre
-		code "onBeforeScript": "chromy/onBefore.js",
-		code "onReadyScript": "chromy/onReady.js",
-		code 
-		code module.exports = function(chromy, scenario, vp) {
-		code   // chromy – Chromy instance
-		code   // scenario object
-		code   // vp – viewport obj
-		code   };
-
-section.slide
 	h2 Scenarios
 
 	pre
 		code "scenarios": [
 		code   {
+		code.mark.next     "label": "test_page",
 		code.mark.next     "url": "website.com",
-		code.mark.next     "referenceUrl": "stage.website.com",
 		code     //--
 		code.mark.next     "url": "..local_folder/index.html",
+		code.mark.next     "referenceUrl": "stage.website.com",
 		code     ...
-		code   },
-
 
 section.slide
 	h2 Scenarios
 	pre
-		code.mark.next "hideSelectors": [".hide_on_test"],
-		code.mark.next "removeSelectors": [".remove_on_test"],
-		code.mark.next "selectors": [
-		code   ".hero",
-		code   ".portfolio",
-		code   ".newsletter",
-		code ],
-
+		code.mark.next   "selectors": [
+		code.mark.next     "#menu",
+		code.mark.next     ".hero"
+		code.mark.next     "header"
+		code   ],
+		code   ...
 
 section.slide
 	h2 Scenarios
 	pre
-		code.mark.next     "readyEvent": null, // or some event
+		//- code.mark.next     "cookiePath": "./cookies.json",
+		code.mark.next     "hideSelectors": [".hide_on_test"],
+		code.mark.next     "removeSelectors": [".remove_on_test"],
+		//- code.mark.next     "hoverSelector": "",
+		//- code.mark.next     "clickSelector": "",
 		code.mark.next     "delay": 500,
 		code.mark.next     "misMatchThreshold" : 0.1,
 		code   }
 		code ]
+		//- code      ...
 
-section.slide
-	h2 Paths
-	pre
-		code "paths": {
-		code   "bitmaps_reference": "./bitmaps_reference",
-		code   "bitmaps_test": "./bitmaps_test",
-		code   "engine_scripts": "./engine_scripts",
-		code   "html_report": "./html_report",
-		code   "ci_report": "./ci_report"
-		code },
+//- section.slide
+//- 	h2 Scenarios
+//- 	pre
+	//- code     "readySelector": "",
+	//- code     "postInteractionWait": "",
+	//- code.mark.next     "readyEvent": null, // or some event
+
+//- section.slide
+//- 	h2 Paths
+//- 	pre
+//- 		code "paths": {
+//- 		code   "bitmaps_reference": "./bitmaps_reference",
+//- 		code   "bitmaps_test": "./bitmaps_test",
+//- 		code   "engine_scripts": "./engine_scripts",
+//- 		code   "html_report": "./html_report",
+//- 		code   "ci_report": "./ci_report"
+//- 		code }
 
